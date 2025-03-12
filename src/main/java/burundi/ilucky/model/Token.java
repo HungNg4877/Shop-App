@@ -1,5 +1,6 @@
 package burundi.ilucky.model;
 
+import burundi.ilucky.model.dto.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,10 +11,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Token {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Token extends BaseEntity {
+
     @ManyToOne
     private User user;
     private String accessToken;

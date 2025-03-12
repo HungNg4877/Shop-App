@@ -2,6 +2,7 @@ package burundi.ilucky.model;
 
 import java.util.Date;
 
+import burundi.ilucky.model.dto.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,10 +21,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "lucky_history")
-public class LuckyHistory {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class LuckyHistory extends BaseEntity {
 
     @Column(nullable = false)
     private String giftId;

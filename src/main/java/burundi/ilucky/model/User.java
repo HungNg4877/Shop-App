@@ -1,15 +1,10 @@
 package burundi.ilucky.model;
 
 import java.util.Date;
+import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import burundi.ilucky.model.dto.BaseEntity;
+import jakarta.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -24,10 +19,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class User extends BaseEntity {
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -35,16 +27,13 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastUpdate;
-    
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date addTime;
-    
     private long totalPlay;
 
     private long totalVnd;
 
     private long totalStar;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Order> orders;
 
 }

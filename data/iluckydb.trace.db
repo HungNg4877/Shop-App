@@ -711,3 +711,63 @@ Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:522)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 141 more
+2025-03-11 21:03:54.320976+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]order (order_id bigint not null, created_at timestamp(6), oder_date timestamp(6), status enum ('CANCELED','PAID','PENDING'), total_amount numeric(38,2), user_id bigint not null, primary key (order_id))"; expected "identifier"; SQL statement:
+create table order (order_id bigint not null, created_at timestamp(6), oder_date timestamp(6), status enum ('CANCELED','PAID','PENDING'), total_amount numeric(38,2), user_id bigint not null, primary key (order_id)) [42001-224]
+2025-03-11 21:03:54.340190+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (id bigint not null, add_time timestamp(6), last_update timestamp(6), password varchar(255) not null, total_play bigint not null, total_star bigint not null, total_vnd bigint not null, username varchar(255) not null, primary key (id))"; expected "identifier"; SQL statement:
+create table user (id bigint not null, add_time timestamp(6), last_update timestamp(6), password varchar(255) not null, total_play bigint not null, total_star bigint not null, total_vnd bigint not null, username varchar(255) not null, primary key (id)) [42001-224]
+2025-03-11 21:03:54.347074+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists [*]user drop constraint if exists UKsb8bbouer5wak8vyiiy4pf2bx"; expected "identifier"; SQL statement:
+alter table if exists user drop constraint if exists UKsb8bbouer5wak8vyiiy4pf2bx [42001-224]
+2025-03-11 21:03:54.347074+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists [*]user add constraint UKsb8bbouer5wak8vyiiy4pf2bx unique (username)"; expected "identifier"; SQL statement:
+alter table if exists user add constraint UKsb8bbouer5wak8vyiiy4pf2bx unique (username) [42001-224]
+2025-03-11 21:03:54.362019+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists bonus_history add constraint FK1svu46sgkyvfw1fv9clhleimh foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists bonus_history add constraint FK1svu46sgkyvfw1fv9clhleimh foreign key (user_id) references user [42001-224]
+2025-03-11 21:03:54.366553+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists lucky_history add constraint FKjbvukqp3br4bm6ecbs7ym5c8i foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists lucky_history add constraint FKjbvukqp3br4bm6ecbs7ym5c8i foreign key (user_id) references user [42001-224]
+2025-03-11 21:03:54.370160+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists [*]order add constraint FKt7abetueht6dd1gs9jyl3o4t7 foreign key (user_id) references user"; expected "identifier"; SQL statement:
+alter table if exists order add constraint FKt7abetueht6dd1gs9jyl3o4t7 foreign key (user_id) references user [42001-224]
+2025-03-11 21:03:54.374288+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists order_detail add constraint FKplam7wxc4tjbgex0xyk8f0qxo foreign key (order_id) references [*]order"; expected "identifier"; SQL statement:
+alter table if exists order_detail add constraint FKplam7wxc4tjbgex0xyk8f0qxo foreign key (order_id) references order [42001-224]
+2025-03-11 21:03:54.384665+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists payment add constraint FK458pu56xefty15ugupb46wrin foreign key (order_id) references [*]order"; expected "identifier"; SQL statement:
+alter table if exists payment add constraint FK458pu56xefty15ugupb46wrin foreign key (order_id) references order [42001-224]
+2025-03-11 21:03:54.389827+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists token add constraint FKe32ek7ixanakfqsdaokm4q9y2 foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists token add constraint FKe32ek7ixanakfqsdaokm4q9y2 foreign key (user_id) references user [42001-224]
+2025-03-13 00:52:30.031967+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]order (id bigint not null, created_at timestamp(6), last_modified timestamp(6), oder_date timestamp(6), status enum ('CANCELED','PAID','PENDING'), total_amount numeric(38,2), user_id bigint not null, primary key (id))"; expected "identifier"; SQL statement:
+create table order (id bigint not null, created_at timestamp(6), last_modified timestamp(6), oder_date timestamp(6), status enum ('CANCELED','PAID','PENDING'), total_amount numeric(38,2), user_id bigint not null, primary key (id)) [42001-224]
+2025-03-13 00:52:30.096783+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (id bigint not null, created_at timestamp(6), last_modified timestamp(6), password varchar(255) not null, total_play bigint not null, total_star bigint not null, total_vnd bigint not null, username varchar(255) not null, primary key (id))"; expected "identifier"; SQL statement:
+create table user (id bigint not null, created_at timestamp(6), last_modified timestamp(6), password varchar(255) not null, total_play bigint not null, total_star bigint not null, total_vnd bigint not null, username varchar(255) not null, primary key (id)) [42001-224]
+2025-03-13 00:52:30.101768+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists [*]user drop constraint if exists UKsb8bbouer5wak8vyiiy4pf2bx"; expected "identifier"; SQL statement:
+alter table if exists user drop constraint if exists UKsb8bbouer5wak8vyiiy4pf2bx [42001-224]
+2025-03-13 00:52:30.102671+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists [*]user add constraint UKsb8bbouer5wak8vyiiy4pf2bx unique (username)"; expected "identifier"; SQL statement:
+alter table if exists user add constraint UKsb8bbouer5wak8vyiiy4pf2bx unique (username) [42001-224]
+2025-03-13 00:52:30.116437+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists bonus_history add constraint FK1svu46sgkyvfw1fv9clhleimh foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists bonus_history add constraint FK1svu46sgkyvfw1fv9clhleimh foreign key (user_id) references user [42001-224]
+2025-03-13 00:52:30.120886+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists lucky_history add constraint FKjbvukqp3br4bm6ecbs7ym5c8i foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists lucky_history add constraint FKjbvukqp3br4bm6ecbs7ym5c8i foreign key (user_id) references user [42001-224]
+2025-03-13 00:52:30.123408+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists [*]order add constraint FKt7abetueht6dd1gs9jyl3o4t7 foreign key (user_id) references user"; expected "identifier"; SQL statement:
+alter table if exists order add constraint FKt7abetueht6dd1gs9jyl3o4t7 foreign key (user_id) references user [42001-224]
+2025-03-13 00:52:30.127425+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists order_detail add constraint FKplam7wxc4tjbgex0xyk8f0qxo foreign key (order_id) references [*]order"; expected "identifier"; SQL statement:
+alter table if exists order_detail add constraint FKplam7wxc4tjbgex0xyk8f0qxo foreign key (order_id) references order [42001-224]
+2025-03-13 00:52:30.135548+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists payment add constraint FK458pu56xefty15ugupb46wrin foreign key (order_id) references [*]order"; expected "identifier"; SQL statement:
+alter table if exists payment add constraint FK458pu56xefty15ugupb46wrin foreign key (order_id) references order [42001-224]
+2025-03-13 00:52:30.140668+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists token add constraint FKe32ek7ixanakfqsdaokm4q9y2 foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists token add constraint FKe32ek7ixanakfqsdaokm4q9y2 foreign key (user_id) references user [42001-224]

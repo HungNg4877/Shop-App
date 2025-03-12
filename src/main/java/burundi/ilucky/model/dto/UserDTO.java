@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -17,7 +19,7 @@ public class UserDTO {
 	
     private Long id;
     private String phone;
-    private Date addTime;
+    private LocalDateTime addTime;
     private long totalPlay;
     private long totalStar;
     
@@ -30,7 +32,7 @@ public class UserDTO {
     
     public UserDTO(User user) {
         this.id = user.getId();
-        this.addTime = user.getAddTime();
+        this.addTime = user.getCreatedAt();
         this.totalPlay = user.getTotalPlay();
         this.totalStar = user.getTotalStar();
     }

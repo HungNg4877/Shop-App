@@ -49,7 +49,7 @@ public class WebSecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/","/api/lucky/*","/api/auth/*","/actuator/*","/h2-console/**").permitAll()
+                        .requestMatchers("/","/api/lucky/*","/api/auth/*","/actuator/*","/h2-console/**","/api/payment/*").permitAll()
 
                         .anyRequest().authenticated()
                 )

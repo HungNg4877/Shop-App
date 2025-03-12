@@ -8,7 +8,12 @@ public enum ErrorCode {
     USER_DOES_NOT_EXIST(HttpStatus.BAD_REQUEST.value(), "user-does-not-exist"),
     USER_EXIST(HttpStatus.BAD_REQUEST.value(), "user-already-exist"),
     WRONG_PASSWORD(HttpStatus.BAD_REQUEST.value(), "wrong-password"),
-    INVALID_REFRESH_TOKEN(HttpStatus.BAD_REQUEST.value(), "invalid-refresh-token")
+    INVALID_REFRESH_TOKEN(HttpStatus.BAD_REQUEST.value(), "invalid-refresh-token"),
+    PRODUCT_NOT_FOUND(HttpStatus.BAD_REQUEST.value(), "product-not-found"),
+    NO_MORE_PRODUCT(HttpStatus.BAD_REQUEST.value(), "no-more-product"),
+    CATEGORY_NOT_FOUND(HttpStatus.BAD_REQUEST.value(), "category-not-found"),
+    CATEGORY_EXIST(HttpStatus.BAD_REQUEST.value(), "category-exist")
+
     ;
     private final int code;
     private final String message;
