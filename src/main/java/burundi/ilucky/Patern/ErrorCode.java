@@ -12,7 +12,9 @@ public enum ErrorCode {
     PRODUCT_NOT_FOUND(HttpStatus.BAD_REQUEST.value(), "product-not-found"),
     NO_MORE_PRODUCT(HttpStatus.BAD_REQUEST.value(), "no-more-product"),
     CATEGORY_NOT_FOUND(HttpStatus.BAD_REQUEST.value(), "category-not-found"),
-    CATEGORY_EXIST(HttpStatus.BAD_REQUEST.value(), "category-exist")
+    CATEGORY_EXIST(HttpStatus.BAD_REQUEST.value(), "category-exist"),
+    ORDER_NOT_FOUND(HttpStatus.BAD_REQUEST.value(), "order-not-found"),
+    PAYMENT_NOT_FOUND(HttpStatus.BAD_REQUEST.value(), "payment-not-found")
 
     ;
     private final int code;

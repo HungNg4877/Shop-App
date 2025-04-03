@@ -22,7 +22,9 @@ import lombok.ToString;
 @Entity
 @Table(name = "lucky_history")
 public class LuckyHistory extends BaseEntity {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(nullable = false)
     private String giftId;
 

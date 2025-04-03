@@ -17,7 +17,7 @@ public class OrderMapper {
                         .productId(detail.getProduct().getId())
                         .productName(detail.getProduct().getName())
                         .quantity(detail.getQuantity())
-                        .price(detail.getPrice())
+                        .price(detail.getTotalMoney())
                         .build())
                 .collect(Collectors.toList());
 
@@ -29,9 +29,16 @@ public class OrderMapper {
 
         return OrderDTO.builder()
                 .orderId(order.getId())
+                .fullName(order.getFullName())
+                .email(order.getEmail())
+                .address(order.getAddress())
+                .note(order.getNote())
+                .shippingMethod(order.getShippingMethod())
+                .shippingAddress(order.getAddress())
+                .shippingDate(order.getOderDate())
                 .orderDate(order.getOderDate())
-                .orderStatus(order.getStatus())
-                .totalAmount(payment.getAmount())
+                .status(order.getStatus())
+                .totalAmount(order.getTotalAmount())
                 .items(itemDTOs)
                 .payment(paymentDTO)
                 .build();

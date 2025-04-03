@@ -16,7 +16,9 @@ import java.math.BigDecimal;
 @Builder
 @Table(name = "order_detail")
 public class OrderDetail extends BaseEntity {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
@@ -27,5 +29,5 @@ public class OrderDetail extends BaseEntity {
 
     private Integer quantity;
 
-    private BigDecimal price;
+    private BigDecimal totalMoney;
 }

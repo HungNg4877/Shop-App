@@ -14,13 +14,15 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "_user")
+@Table(name = "users")
 @Data
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class User extends BaseEntity {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(nullable = false, unique = true)
     private String username;
 
@@ -33,7 +35,10 @@ public class User extends BaseEntity {
 
     private long totalStar;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Order> orders;
+    @Column(name = "facebook_account_id")
+    private int facebookAccountId;
+
+    @Column(name = "google_account_id")
+    private int googleAccountId;
 
 }

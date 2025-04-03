@@ -1,27 +1,35 @@
 package burundi.ilucky.model.dto;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@Data
-@NoArgsConstructor
+@Data//toString
+@Getter
+@Setter
 @AllArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@Entity
+@NoArgsConstructor
+@MappedSuperclass
+
 public class BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @CreatedDate
+
     private LocalDateTime createdAt;
-    @LastModifiedDate
-    private LocalDateTime lastModified;
+
+    private LocalDateTime updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
+
 }

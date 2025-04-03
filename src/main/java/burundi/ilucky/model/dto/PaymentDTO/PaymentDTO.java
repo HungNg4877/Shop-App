@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 @Data
 @Builder
 public class PaymentDTO {
-
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
     private BigDecimal amount;

@@ -15,10 +15,17 @@ import java.util.List;
 @Builder
 public class OrderDTO {
     private Long orderId;
-    private LocalDateTime orderDate;
-    @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus; // PENDING, COMPLETED
+    private String fullName;
+    private String email;
+    private String phoneNumber;
+    private String address;
+    private String note;
     private BigDecimal totalAmount;
+    private String shippingMethod;
+    private String shippingAddress;
+    private LocalDateTime shippingDate;
+    private LocalDateTime orderDate;
+    private OrderStatus status; // PENDING, COMPLETED
     private List<OrderItemDTO> items;
     private PaymentDTO payment;
 }

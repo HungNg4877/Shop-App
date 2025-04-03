@@ -17,12 +17,16 @@ import java.util.Set;
 @Builder
 @Table(name = "category")
 public class Category extends BaseEntity {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
 
     private String description;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private Set<Product> products;
+
+    private boolean isDelete;
 
 }

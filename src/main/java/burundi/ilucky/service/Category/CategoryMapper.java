@@ -12,6 +12,7 @@ public class CategoryMapper {
                 .name(category.getName())
                 .description(category.getDescription())
                 .createdAt(category.getCreatedAt())
+                .isDelete(category.isDelete())
                 .build();
     }
 }

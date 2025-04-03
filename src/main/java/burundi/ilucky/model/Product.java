@@ -17,8 +17,11 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Table(name = "product")
+@EntityListeners(ProductListener.class)
 public class Product extends BaseEntity {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
 
     private String description;
@@ -27,10 +30,9 @@ public class Product extends BaseEntity {
 
     private Integer stock;
 
-    @ManyToMany(mappedBy = "product")
-    private Set<OrderDetail> orderDetails;
-
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    private boolean isDelete;
 }

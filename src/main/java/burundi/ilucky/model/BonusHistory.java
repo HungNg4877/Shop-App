@@ -11,7 +11,9 @@ import java.util.Date;
 @Setter
 @Entity
 public class BonusHistory extends BaseEntity {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @ManyToOne
     private User user;
 

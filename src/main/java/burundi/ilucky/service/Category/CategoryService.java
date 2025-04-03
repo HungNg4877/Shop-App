@@ -2,12 +2,17 @@ package burundi.ilucky.service.Category;
 
 import burundi.ilucky.Exception.BaseException;
 import burundi.ilucky.Patern.ErrorCode;
+import burundi.ilucky.Util.PageUtil;
 import burundi.ilucky.model.Category;
 import burundi.ilucky.payload.Request.CategoryRequest;
+import burundi.ilucky.payload.Request.PagingRequest;
 import burundi.ilucky.payload.Response.CategoryResponse;
+import burundi.ilucky.payload.Response.PageResponse;
 import burundi.ilucky.repository.CategoryRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,22 +25,51 @@ public class CategoryService {
 
     @Transactional
     public CategoryResponse createCategory(CategoryRequest request) {
-        // 1. Kiểm tra danh mục đã tồn tại chưa
+
         if (categoryRepository.existsByName(request.getName())) {
             throw new BaseException(ErrorCode.CATEGORY_EXIST);
         }
 
-        // 2. Tạo đối tượng Category từ request
         Category category = Category.builder()
                 .name(request.getName())
                 .description(request.getDescription())
                 .build();
 
-        // 3. Lưu Category vào database
         Category savedCategory = categoryRepository.save(category);
 
-        // 4. Trả về CategoryResponse
         return categoryMapper.mapToResponse(savedCategory);
     }
+    @Transactional
+    public CategoryResponse updateCategory(Long id, CategoryRequest request) {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        category.setName(request.getName());
+        category.setDescription(request.getDescription());
+        categoryRepository.save(category);
+        return categoryMapper.mapToResponse(category);
+    }
+
+    @Transactional
+    public void deleteCategory(Long id) {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+        category.setDelete(true);
+        categoryRepository.save(category);
+    }
+
+    public PageResponse<CategoryResponse> getAllCategories(PagingRequest<CategoryRequest> pagingRequest) {
+        PageRequest pageRequest = PageUtil.getPageRequest(pagingRequest);
+        Page<Category> page = categoryRepository.findAll(pageRequest);
+
+        Page<CategoryResponse> responsePage = page.map(categoryMapper::mapToResponse);
+        return new PageResponse<>(responsePage);
+    }
+    public CategoryResponse getCategoryById(Long id) {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
+        return categoryMapper.mapToResponse(category);
+    }
+
 
 }
