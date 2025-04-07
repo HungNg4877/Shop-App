@@ -19,6 +19,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,11 +81,13 @@ public class ProductService {
     }
     public PageResponse<ProductResponse> getAllProducts(String keyword, PagingRequest<CategoryIdFilter> pagingRequest) {
         PageRequest pageRequest = PageUtil.getPageRequest(pagingRequest);
-        Long categoryId = pagingRequest.getFilter() != null ? pagingRequest.getFilter().getIdCategory() : null;
+        Long categoryId = pagingRequest.getFilter() != null ? Long.valueOf(pagingRequest.getFilter().getIdCategory()) : null;
         Page<Product> productPage = productRepository.searchProducts(categoryId, keyword, pageRequest);
-        List<ProductResponse> productResponses = productPage.getContent().stream()
-                .map(productMapper::mapToResponse)
-                .collect(Collectors.toList());
+        List<ProductResponse> productResponses = new ArrayList<>();
+        for (Product product : productPage.getContent()){
+            ProductResponse productResponse = productMapper.mapToResponse(product);
+            productResponses.add(productResponse);
+        }
 
         return new PageResponse<>(new PageImpl<>(productResponses, pageRequest, productPage.getTotalElements()));
     }

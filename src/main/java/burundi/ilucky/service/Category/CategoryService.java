@@ -12,8 +12,12 @@ import burundi.ilucky.repository.CategoryRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CategoryService {
@@ -61,9 +65,12 @@ public class CategoryService {
     public PageResponse<CategoryResponse> getAllCategories(PagingRequest<CategoryRequest> pagingRequest) {
         PageRequest pageRequest = PageUtil.getPageRequest(pagingRequest);
         Page<Category> page = categoryRepository.findAll(pageRequest);
-
-        Page<CategoryResponse> responsePage = page.map(categoryMapper::mapToResponse);
-        return new PageResponse<>(responsePage);
+        List<CategoryResponse> responsePage = new ArrayList<>();
+        for (Category category : page.getContent()){
+            CategoryResponse categoryResponse = categoryMapper.mapToResponse(category);
+            responsePage.add(categoryResponse);
+        }
+        return new PageResponse<>(new PageImpl<>(responsePage, pageRequest, page.getTotalElements()));
     }
     public CategoryResponse getCategoryById(Long id) {
         Category category = categoryRepository.findById(id)

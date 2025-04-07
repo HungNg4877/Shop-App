@@ -53,9 +53,17 @@ public class ProductController {
     public ResponseEntity<PageResponse<ProductResponse>> getAllProducts(@RequestParam(required = false, defaultValue = "") String keyword,
             @RequestBody PagingRequest<CategoryIdFilter> pagingRequest) {
         PageRequest pageRequest = PageUtil.getPageRequest(pagingRequest);
-        Long categoryId = (pagingRequest.getFilter() != null) ? pagingRequest.getFilter().getIdCategory() : null;
+        String rawCategoryId = (pagingRequest.getFilter() != null) ? pagingRequest.getFilter().getIdCategory() : null;
+        Long categoryId = null;
+        if (rawCategoryId != null && !"all".equalsIgnoreCase(rawCategoryId) && !rawCategoryId.isBlank()) {
+            try {
+                categoryId = Long.parseLong(rawCategoryId);
+            } catch (NumberFormatException e) {
+                return ResponseEntity.badRequest().build();
+            }
+        }
 
-        // ✅ Kiểm tra dữ liệu trong Redis cache
+        // Kiểm tra dữ liệu trong Redis cache
         List<ProductResponse> cachedProducts = productRedisService.getAllProducts(keyword, categoryId, pageRequest);
         if (cachedProducts != null) {
             PageResponse<ProductResponse> cachedResponse = new PageResponse<>(
@@ -64,10 +72,10 @@ public class ProductController {
             return ResponseEntity.ok(cachedResponse);
         }
 
-        // 🔄 Nếu không có cache, lấy từ DB
+        // Nếu không có cache, lấy từ DB
         PageResponse<ProductResponse> response = productService.getAllProducts(keyword, pagingRequest);
 
-        // ✅ Lưu vào Redis cache
+        // Lưu vào Redis cache
         try {
             productRedisService.saveAllProducts(response.getContent(), keyword, categoryId, pageRequest);
         } catch (JsonProcessingException e) {
